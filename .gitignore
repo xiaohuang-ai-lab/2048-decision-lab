@@ -1,0 +1,18 @@
+# Local secrets and runtime data
+.env
+.env.*
+!.env.example
+.local/
+logs/
+exports/
+.build/
+node_modules/
+
+# Generated benchmark data
+benchmarks/*.json
+benchmarks/*.json.gz
+benchmarks/native-v1/
+
+# Editor / OS files
+.DS_Store
+*.log

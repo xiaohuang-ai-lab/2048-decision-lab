@@ -1,0 +1,644 @@
+{
+  "format": "xiaohuang-2048-archive-v1",
+  "engine": "2048-v1/fnv1a-mulberry32",
+  "source": "local-browser-session",
+  "runtime": {
+    "node": "v22.22.2",
+    "platform": "darwin"
+  },
+  "session": {
+    "id": "77c78e81-3af2-40e7-9d98-262c6c5c8670",
+    "created_at": "2026-10-19T09:45:45.285Z",
+    "seed": "xiaohuang-001",
+    "initial": {
+      "board": [
+        [
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "score": 0,
+      "steps": 0
+    },
+    "events": [
+      {
+        "id": "be032f2c-9b3b-4e3b-b1a7-391852ba875c",
+        "at": "2026-10-19T09:45:45.900Z",
+        "mode": "llm",
+        "before": {
+          "board": [
+            [
+              0,
+              0,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "score": 0,
+          "steps": 0
+        },
+        "requested_model": "deepseek-flash",
+        "timeline": [
+          {
+            "at": "2026-10-19T09:45:45.900Z",
+            "label": "准备模型请求，先保存本地日志"
+          },
+          {
+            "at": "2026-10-19T09:45:45.919Z",
+            "label": "请求发出，等待模型响应"
+          },
+          {
+            "at": "2026-10-19T09:45:47.126Z",
+            "label": "收到本地服务响应"
+          },
+          {
+            "at": "2026-10-19T09:45:47.126Z",
+            "label": "动作通过校验：向上"
+          },
+          {
+            "at": "2026-10-19T09:45:47.126Z",
+            "label": "动作已执行，棋盘与得分已更新"
+          }
+        ],
+        "run_settings": {
+          "interval_ms": 0,
+          "step_limit": 20
+        },
+        "pricing": {
+          "version": "2026-10-19-v1",
+          "checked_at": "2026-10-19",
+          "model": "deepseek-flash",
+          "provider": "api.deepseek.com",
+          "currency": "CNY",
+          "input_per_million": 2,
+          "cached_input_per_million": 0.04,
+          "output_per_million": 8,
+          "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+          "period": "peak",
+          "period_selection": "peak",
+          "assumptions": [
+            "按用户选择的高峰或空闲费率估算。",
+            "未含优惠、税费或充值抵扣；以服务商账单为准。"
+          ]
+        },
+        "status": "applied",
+        "request_sent_at": "2026-10-19T09:45:45.918Z",
+        "round_trip_ms": 1225,
+        "result": {
+          "direction": "up",
+          "probabilities": null,
+          "confidence": null,
+          "model": "LOCAL-TEST-FIXTURE",
+          "requested_model": "deepseek-flash",
+          "latency_ms": 1202,
+          "usage": {
+            "prompt_tokens": 340,
+            "completion_tokens": 12,
+            "total_tokens": 352,
+            "prompt_tokens_details": {
+              "cached_tokens": 120
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 4
+            }
+          },
+          "prompt_version": "2048-direct-v1",
+          "request": {
+            "thinking": {
+              "type": "disabled"
+            },
+            "model": "deepseek-flash",
+            "stream": false,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_object"
+            },
+            "messages": [
+              {
+                "role": "system",
+                "content": "Play standard 2048 on a 4x4 board. Rows are top to bottom and columns left to right; 0 is empty. A move slides all tiles toward that edge. Adjacent equal tiles merge once per move. After a valid move, a random empty cell receives a 2 (90%) or 4 (10%). Choose exactly one available direction to maximize the chance of reaching 2048 while avoiding game over. Evaluate the current board; no future random tile or search result is provided. Return only JSON with one field: {\"direction\":\"up|down|left|right\"}. Do not add explanations."
+              },
+              {
+                "role": "user",
+                "content": "{\"board\":[[0,0,2,0],[0,0,2,0],[0,0,0,0],[0,0,0,0]],\"score\":0,\"move_number\":1,\"available_moves\":[\"up\",\"down\",\"left\",\"right\"],\"options\":{\"up\":\"向上\",\"down\":\"向下\",\"left\":\"向左\",\"right\":\"向右\"}}"
+              }
+            ]
+          },
+          "raw_response": {
+            "model": "LOCAL-TEST-FIXTURE",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "message": {
+                  "content": "{\"direction\":\"up\"}"
+                }
+              }
+            ],
+            "usage": {
+              "prompt_tokens": 340,
+              "completion_tokens": 12,
+              "total_tokens": 352,
+              "prompt_tokens_details": {
+                "cached_tokens": 120
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 4
+              }
+            }
+          }
+        },
+        "direction": "up",
+        "gained": 4,
+        "spawned": {
+          "row": 0,
+          "col": 0,
+          "value": 2
+        },
+        "after": {
+          "board": [
+            [
+              2,
+              0,
+              4,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "score": 4,
+          "steps": 1
+        },
+        "cost_estimate": {
+          "status": "estimated",
+          "currency": "CNY",
+          "amount": 0.0005408,
+          "components": {
+            "input_uncached": 0.00044,
+            "input_cached": 0.0000048,
+            "output": 0.000096
+          },
+          "assumptions": [
+            "按用户选择的高峰或空闲费率估算。",
+            "未含优惠、税费或充值抵扣；以服务商账单为准。"
+          ]
+        }
+      },
+      {
+        "id": "e1b3ed00-71cb-4ec2-ae82-952b7adf8098",
+        "at": "2026-10-19T09:45:52.591Z",
+        "mode": "jev",
+        "before": {
+          "board": [
+            [
+              2,
+              0,
+              4,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "score": 4,
+          "steps": 1
+        },
+        "requested_model": "jev-1.14.0",
+        "timeline": [
+          {
+            "at": "2026-10-19T09:45:52.591Z",
+            "label": "准备模型请求，先保存本地日志"
+          },
+          {
+            "at": "2026-10-19T09:45:52.610Z",
+            "label": "请求发出，等待模型响应"
+          },
+          {
+            "at": "2026-10-19T09:45:53.817Z",
+            "label": "收到本地服务响应"
+          },
+          {
+            "at": "2026-10-19T09:45:53.817Z",
+            "label": "动作通过校验：向下"
+          },
+          {
+            "at": "2026-10-19T09:45:53.817Z",
+            "label": "动作已执行，棋盘与得分已更新"
+          }
+        ],
+        "run_settings": {
+          "interval_ms": 0,
+          "step_limit": 20
+        },
+        "pricing": {
+          "version": "2026-10-19-v1",
+          "checked_at": "2026-10-19",
+          "model": "jev-1.14.0",
+          "provider": "api.typesafe.ai",
+          "currency": "USD",
+          "input_per_million": 0.042,
+          "cached_input_per_million": 0.042,
+          "output_per_million": 0,
+          "source_url": "https://typesafe.ai/blog/jack-jill-jev-case-study",
+          "period": "standard",
+          "assumptions": [
+            "按官方公开标价，未含合同优惠、税费或充值抵扣。"
+          ]
+        },
+        "status": "applied",
+        "request_sent_at": "2026-10-19T09:45:52.610Z",
+        "round_trip_ms": 1225,
+        "result": {
+          "direction": "down",
+          "probabilities": {
+            "down": 1,
+            "left": 0,
+            "right": 0
+          },
+          "confidence": 1,
+          "model": "LOCAL-TEST-FIXTURE",
+          "requested_model": "jev-1.14.0",
+          "latency_ms": 1202,
+          "usage": {
+            "input_tokens": 210,
+            "output_tokens": 24
+          },
+          "prompt_version": "2048-direct-v1",
+          "request": {
+            "model": "jev-1.14.0",
+            "state": {
+              "board": [
+                [
+                  2,
+                  0,
+                  4,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "score": 4,
+              "move_number": 2,
+              "available_moves": [
+                "down",
+                "left",
+                "right"
+              ],
+              "options": {
+                "down": "向下",
+                "left": "向左",
+                "right": "向右"
+              }
+            },
+            "questions": {
+              "move": {
+                "type": "choice",
+                "instructions": "Play standard 2048 on a 4x4 board. Rows are top to bottom and columns left to right; 0 is empty. A move slides all tiles toward that edge. Adjacent equal tiles merge once per move. After a valid move, a random empty cell receives a 2 (90%) or 4 (10%). Choose exactly one available direction to maximize the chance of reaching 2048 while avoiding game over. Evaluate the current board; no future random tile or search result is provided.",
+                "criteria": {
+                  "down": "向下",
+                  "left": "向左",
+                  "right": "向右"
+                }
+              }
+            }
+          },
+          "raw_response": {
+            "model": "LOCAL-TEST-FIXTURE",
+            "answers": {
+              "move": {
+                "type": "choice",
+                "choice": "down",
+                "probabilities": {
+                  "down": 1,
+                  "left": 0,
+                  "right": 0
+                },
+                "confidence": 1
+              }
+            },
+            "usage": {
+              "input_tokens": 210,
+              "output_tokens": 24
+            }
+          }
+        },
+        "direction": "down",
+        "gained": 0,
+        "spawned": {
+          "row": 1,
+          "col": 1,
+          "value": 2
+        },
+        "after": {
+          "board": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              4,
+              0
+            ]
+          ],
+          "score": 4,
+          "steps": 2
+        },
+        "cost_estimate": {
+          "status": "estimated",
+          "currency": "USD",
+          "amount": 0.00000882,
+          "components": {
+            "input_uncached": 0.00000882,
+            "input_cached": 0,
+            "output": 0
+          },
+          "assumptions": [
+            "按官方公开标价，未含合同优惠、税费或充值抵扣。"
+          ]
+        }
+      },
+      {
+        "id": "daba86d3-20e8-4b2a-9710-62c9b9fc19ab",
+        "at": "2026-10-19T09:46:02.311Z",
+        "mode": "llm",
+        "before": {
+          "board": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              4,
+              0
+            ]
+          ],
+          "score": 4,
+          "steps": 2
+        },
+        "requested_model": "deepseek-flash",
+        "timeline": [
+          {
+            "at": "2026-10-19T09:46:02.311Z",
+            "label": "准备模型请求，先保存本地日志"
+          },
+          {
+            "at": "2026-10-19T09:46:02.329Z",
+            "label": "请求发出，等待模型响应"
+          },
+          {
+            "at": "2026-10-19T09:46:03.536Z",
+            "label": "收到本地服务响应"
+          },
+          {
+            "at": "2026-10-19T09:46:03.536Z",
+            "label": "请求或动作失败，停止执行"
+          }
+        ],
+        "run_settings": {
+          "interval_ms": 0,
+          "step_limit": 20
+        },
+        "pricing": {
+          "version": "2026-10-19-v1",
+          "checked_at": "2026-10-19",
+          "model": "deepseek-flash",
+          "provider": "api.deepseek.com",
+          "currency": "CNY",
+          "input_per_million": 1,
+          "cached_input_per_million": 0.02,
+          "output_per_million": 4,
+          "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+          "period": "offpeak",
+          "period_selection": "offpeak",
+          "assumptions": [
+            "按用户选择的高峰或空闲费率估算。",
+            "未含优惠、税费或充值抵扣；以服务商账单为准。"
+          ]
+        },
+        "status": "failed",
+        "request_sent_at": "2026-10-19T09:46:02.329Z",
+        "round_trip_ms": 1225,
+        "evidence": {
+          "prompt_version": "2048-direct-v1",
+          "request": {
+            "thinking": {
+              "type": "disabled"
+            },
+            "model": "deepseek-flash",
+            "stream": false,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_object"
+            },
+            "messages": [
+              {
+                "role": "system",
+                "content": "Play standard 2048 on a 4x4 board. Rows are top to bottom and columns left to right; 0 is empty. A move slides all tiles toward that edge. Adjacent equal tiles merge once per move. After a valid move, a random empty cell receives a 2 (90%) or 4 (10%). Choose exactly one available direction to maximize the chance of reaching 2048 while avoiding game over. Evaluate the current board; no future random tile or search result is provided. Return only JSON with one field: {\"direction\":\"up|down|left|right\"}. Do not add explanations."
+              },
+              {
+                "role": "user",
+                "content": "{\"board\":[[0,0,0,0],[0,2,0,0],[0,0,0,0],[2,0,4,0]],\"score\":4,\"move_number\":3,\"available_moves\":[\"up\",\"down\",\"left\",\"right\"],\"options\":{\"up\":\"向上\",\"down\":\"向下\",\"left\":\"向左\",\"right\":\"向右\"}}"
+              }
+            ]
+          },
+          "raw_response": {
+            "model": "LOCAL-TEST-FIXTURE",
+            "choices": [
+              {
+                "finish_reason": "tool_calls",
+                "message": {
+                  "content": null,
+                  "tool_calls": [
+                    {
+                      "id": "mock_call_1",
+                      "type": "function",
+                      "function": {
+                        "name": "move",
+                        "arguments": "{\"direction\":\"up\"}"
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "usage": {
+              "prompt_tokens": 340,
+              "completion_tokens": 12,
+              "total_tokens": 352,
+              "prompt_tokens_details": {
+                "cached_tokens": 120
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 4
+              }
+            }
+          },
+          "latency_ms": 1201
+        },
+        "error": "大模型输出未正常完成，本步未执行",
+        "cost_estimate": {
+          "status": "estimated",
+          "currency": "CNY",
+          "amount": 0.0002704,
+          "components": {
+            "input_uncached": 0.00022,
+            "input_cached": 0.0000024,
+            "output": 0.000048
+          },
+          "assumptions": [
+            "按用户选择的高峰或空闲费率估算。",
+            "未含优惠、税费或充值抵扣；以服务商账单为准。"
+          ]
+        }
+      }
+    ],
+    "final": {
+      "board": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          4,
+          0
+        ]
+      ],
+      "score": 4,
+      "steps": 2
+    }
+  },
+  "saved_at": "2026-10-19T09:46:03.538Z",
+  "evidence_kind": "Local mock responses only. No real model inference or actual billing."
+}

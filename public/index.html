@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>2048 决策实验室 · 小黄有算力</title><link rel="icon" href="data:,"><link rel="stylesheet" href="/style.css"><script type="module" src="/app.mjs"></script></head>
+<body>
+  <header class="masthead"><a class="brand" href="/"><span class="brand-icon">算</span>小黄有算力<span class="brand-sep">/</span><span class="lab-name">交互实验室</span></a><span class="issue">EXPERIMENT 001 <i></i> 本地运行</span></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">FOUR DIRECTIONS. ONE DECISION.</p><h1>2048<span>决策实验室</span></h1><p class="subtitle">把下一步交给 AI。挑战 2048，或让本地算法继续走得更远。</p></div><a class="text-button" href="/stats" target="_blank" rel="noopener">对局统计 ↗</a><button class="text-button" id="open-settings">接入设置 <span>↗</span></button></section>
+    <div class="workspace">
+      <section class="play-area" aria-label="2048 游戏">
+        <div class="objective-controls"><label for="objective">玩法 <select id="objective"><option value="target-2048-v1" selected>2048 封顶</option><option value="endless-v1">无限挑战</option></select></label><span id="objective-note">达到 2048 即结束 · 切换玩法将新开一局</span></div>
+        <div class="scoreboard"><div class="score-block"><span>本局得分</span><strong id="score">0</strong></div><div class="score-block"><span>最大方块</span><strong id="max-tile">2</strong></div><div class="score-block"><span>有效步数</span><strong id="steps">0</strong></div><div class="score-block play-clock" title="首次操作开始；包含决策、重试和步间等待；暂停或离开页面时冻结，下一次操作继续。与统计页包含暂停的经过时间不同。"><span>本局用时 · 不含暂停</span><strong id="play-time" role="timer" aria-label="本局用时">00:00:00</strong></div></div>
+        <div class="board-shell"><div id="board" class="board" role="grid" aria-label="2048 棋盘，方向键或 WASD 操作" tabindex="0"></div><div id="game-overlay" class="game-overlay" hidden><span id="end-icon">✦</span><h2 id="end-title"></h2><p id="end-description"></p><button id="end-new" class="primary">再来一局 ↗</button></div></div>
+        <div class="board-footer"><span><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> 或 WASD · 支持滑动</span><button class="text-button" id="new-game">新开一局 ↻</button></div>
+        <details class="experiment-options"><summary>复现实验 <span>固定种子 · 相同起点</span></summary><div class="seed-controls"><label for="seed">随机种子</label><input id="seed" maxlength="64" value="xiaohuang-001"><button id="replay-seed" class="secondary">按此种子重开</button></div><p>相同种子与相同动作序列可复现棋盘。不同策略会改变空格位置，后续新方块位置未必相同。</p></details>
+      </section>
+      <aside class="control-panel">
+        <div class="panel-top"><p class="eyebrow">WHO'S PLAYING?</p><span id="mode-tag" class="pill">手动操作</span></div>
+        <div class="mode-switch" role="group" aria-label="操作模式"><button data-mode="manual" aria-pressed="true">手动</button><button data-mode="llm" aria-pressed="false">大模型</button><button data-mode="jev" aria-pressed="false">Jev</button><button data-mode="local" aria-pressed="false">代码 AI</button></div>
+        <div class="model-info"><div class="model-mark" id="model-mark">↗</div><div><strong id="model-title">这一局，你来决定</strong><p id="model-description">继续合并，挑战更大的方块。</p></div></div>
+        <p id="connection" class="connection">手动模式无需 API</p>
+        <div id="ai-controls" hidden><div class="run-settings"><label>每轮最多<select id="step-limit"><option value="1">1 步</option><option value="20" selected>20 步</option><option value="100">100 步</option><option value="500">500 步</option><option value="1000">1000 步</option><option id="step-limit-5000" value="5000" hidden disabled>5000 步</option><option id="step-limit-unlimited" value="unlimited" hidden disabled>不限步数</option></select></label><label>步间等待<select id="interval"><option value="0" selected>0 秒 · 连续决策</option><option value="200">0.2 秒</option><option value="600">0.6 秒</option><option value="1500">1.5 秒</option></select></label></div><div id="strategy-controls" hidden><label class="strategy-label">决策策略<select id="strategy"><option value="assisted" selected>增强 · 攻略 + 局面指标</option><option value="guided">攻略 · 仅增强提示词</option><option value="direct">原始 · 直接读取棋盘</option></select></label><p class="micro">两种模型共享攻略与指标；最终动作由模型选择。尚未验证胜率提升。</p></div><div id="local-engine-controls" hidden><label class="strategy-label">本地算法<select id="local-engine"><option value="nneonneo" selected>成熟版 · nneonneo C++</option><option value="simple">简化版 · JavaScript v2</option></select></label></div><p id="local-search-note" class="micro" hidden>最多前瞻 3 步，每次最多访问 12,000 个节点；预算不足时采用完整搜索过的深度。按随机落子概率求期望，不读取未来随机数。评分不等于胜率。</p><div class="run-buttons"><button id="run" class="primary">开始运行 ▶</button><button id="single-step" class="secondary">单步</button></div><p id="run-note" class="micro">0 秒仅取消额外等待，上一手完成后请求下一手。失败后间隔 1 秒，最多重试 5 次（可能额外计费）；成功后计数重置，暂停可取消。</p></div>
+        <div id="manual-controls" class="manual-controls"><button data-direction="up" aria-label="向上">↑</button><div><button data-direction="left" aria-label="向左">←</button><button data-direction="down" aria-label="向下">↓</button><button data-direction="right" aria-label="向右">→</button></div></div>
+      </aside>
+    </div>
+    <section class="terminal-section" aria-label="模型输出终端">
+      <div class="section-heading"><div><p class="eyebrow">DECISION OUTPUT CONSOLE</p><h2>直接看每一步的决策。</h2></div><span class="terminal-scope">只读输出 · 当前棋局</span></div>
+      <div class="terminal-window">
+        <div class="terminal-titlebar"><span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>decision.log — 2048</span><span id="terminal-count">0 / 0 条请求</span></div>
+        <div class="terminal-toolbar">
+          <label>来源 <select id="terminal-filter"><option value="all">全部来源</option><option value="jev">Jev</option><option value="llm">大模型</option><option value="local">代码 AI</option></select></label>
+          <label>显示 <select id="terminal-limit"><option value="20">最近 20 条</option><option value="100">最近 100 条</option><option value="all">本局全部</option></select></label>
+          <label><input type="checkbox" id="terminal-raw">完整响应 JSON</label>
+          <label><input type="checkbox" id="terminal-follow" checked>跟随输出</label>
+          <button id="terminal-copy" type="button" disabled>复制当前输出</button>
+        </div>
+        <div class="terminal-monitor"><span id="live-elapsed">—</span><span>有效返回 <b id="requests">0</b> · 平均 <b id="avg-latency">—</b></span></div>
+        <div id="status" class="status" role="status" aria-live="polite">棋盘已就绪，试着移动第一步。</div>
+        <div id="terminal-output" class="terminal-output" tabindex="0" aria-label="模型原始输出记录"></div>
+        <div class="terminal-footer"><span>OUTPUT / TOOL = 模型返回　·　LOCAL = 本地搜索　·　WAIT / EXEC / ERROR = 应用日志</span><span>完整响应后更新 · 概率 / confidence 不代表获胜概率</span></div>
+      </div>
+    </section>
+    <section class="history-section">
+      <div class="section-heading"><div><p class="eyebrow">LIVE DECISION LOG</p><h2>选了什么，花了多少。</h2></div><button id="export" class="secondary">导出记录 ↓</button></div>
+      <div class="autosave-bar"><p id="autosave-status" class="micro" role="status">准备自动保存到本地…</p><button id="autosave-retry" class="secondary" type="button" hidden>重试保存</button></div>
+      <div class="usage-summary"><div><span>模型 API 请求 · 本局</span><strong id="usage-requests">0</strong></div><div><span>已报告输入 tokens</span><strong id="usage-input">—</strong></div><div><span>已报告输出 tokens</span><strong id="usage-output">—</strong></div><div><span>已报告合计 tokens</span><strong id="usage-total">—</strong></div></div>
+      <div class="cost-summary"><div><span>本局估算 · 人民币</span><strong id="cost-cny">—</strong></div><div><span>本局估算 · 美元</span><strong id="cost-usd">—</strong></div></div>
+      <p id="cost-note" class="micro"></p>
+      <details class="pricing-details"><summary>估算费率与来源 · 非实际账单</summary>
+        <label>DeepSeek 计费时段 <select id="billing-period"><option value="auto">自动 · 未识别法定节假日</option><option value="peak">按高峰价估算</option><option value="offpeak">按空闲价估算</option></select></label>
+        <p class="micro">只影响接下来发出的请求，历史记录保留当时单价。自动模式按北京时间周一至周五 9–12、14–18 时为高峰；法定节假日请选空闲价。</p>
+        <p class="micro">2026-10-19 核对：DeepSeek Flash 高峰每百万 Token 输入 ¥2、缓存输入 ¥0.04、输出 ¥8，空闲减半；V4 Pro 高峰分别 ¥9、¥0.30、¥27，空闲减半。Jev 输入 US$0.042，输出免费。仅匹配已知官方服务和模型；自定义服务/未知模型显示未知。</p>
+        <p class="micro"><a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noreferrer">DeepSeek 官方价格</a> · <a href="https://typesafe.ai/blog/jack-jill-jev-case-study" target="_blank" rel="noreferrer">TypeSafe 官方标价来源</a>。费率为固定快照，不自动联网更新；不含优惠或税费，实际以账单为准。</p>
+      </details>
+      <p id="usage-by-mode" class="micro"></p><p id="usage-note" class="micro"></p>
+      <div class="log-toolbar"><label><input id="follow-latest" type="checkbox" checked> 跟随最新决策</label><label>展示 <select id="log-limit"><option value="20">最近 20 条</option><option value="100">最近 100 条</option><option value="all">本局全部</option></select></label></div>
+      <div class="table-wrap log-table"><table><thead><tr><th>记录 / 模式</th><th>动作</th><th>合并得分</th><th>决策耗时</th><th>Token 输入 / 输出</th><th>估算费用</th><th>状态</th><th>详情</th></tr></thead><tbody id="history"></tbody></table><div id="empty-history" class="empty-state"><span>↗</span><p>从第一步开始，留下你的实验记录。</p><small>请求发出后即时入列，完整响应返回后更新动作与用量。</small></div></div>
+      <section id="log-inspector" class="log-inspector" hidden aria-label="决策详情">
+        <div class="section-heading"><h3 id="inspect-title"></h3><span id="inspect-state" class="pill"></span></div><p id="inspect-model" class="micro"></p><p id="inspect-error" class="status error" hidden></p>
+        <p id="inspect-warning" class="status warning" hidden></p>
+        <ol id="inspect-timeline" class="decision-timeline"></ol>
+        <div id="inspect-usage" class="inspect-usage"></div><p id="inspect-cost" class="action-summary"></p><p id="inspect-cost-detail" class="micro"></p>
+        <p id="inspect-action" class="action-summary"></p>
+        <div class="board-comparison"><div><h4>决策前 · 输入棋盘</h4><pre id="inspect-before"></pre></div><div><h4>执行后 · 含新生成方块</h4><pre id="inspect-after"></pre></div></div>
+        <p id="inspect-latency" class="micro"></p>
+        <div class="raw-details"><details open><summary>决策原始返回</summary><pre id="inspect-response"></pre></details><details><summary>请求输入与提示词</summary><pre id="inspect-request"></pre></details><details><summary>原始 Token 用量</summary><pre id="inspect-raw-usage"></pre></details></div>
+      </section>
+      <p class="micro history-note">统计范围为当前棋局（包括失败后已返回的用量）。日志约每秒后台批量保存 JSON 与 Markdown 到 logs/，暂停或结束时立即提交剩余记录，不阻塞下一步决策。刷新或关闭前请确认“已保存到本地”；强制退出可能丢失尚未写盘的尾部记录。导出含本页全部棋局，已保存文件保留。</p>
+    </section>
+    <footer><span>小黄有算力 <b>·</b> AI 热点落地的第一站</span><span>先动手，再下结论。</span></footer>
+  </main>
+  <dialog id="settings">
+    <div class="dialog-heading"><div><p class="eyebrow">MODEL CONNECTION</p><h2>连接你的模型</h2></div><button id="close-settings" type="button" class="text-button" aria-label="关闭设置">✕</button></div>
+    <p>填写后保存到本机，刷新页面或重启服务后自动恢复。</p>
+    <div class="mode-switch settings-tabs" role="group" aria-label="配置模式"><button type="button" data-config-mode="llm" aria-pressed="true">大模型</button><button type="button" data-config-mode="jev" aria-pressed="false">Jev</button></div>
+    <form id="config-form" autocomplete="off">
+      <div class="config-form-heading"><strong id="config-provider-label">Chat Completions 兼容接口</strong><span id="config-badge" class="pill">未配置</span></div>
+      <label class="field-label" for="config-base">服务地址 <span>Base URL</span></label>
+      <input id="config-base" name="base" type="url" required maxlength="2000" placeholder="https://api.deepseek.com" spellcheck="false" autocomplete="off" aria-describedby="config-base-help">
+      <p id="config-base-help" class="field-help">填写基础地址，不含 /chat/completions。</p>
+      <label class="field-label" for="config-model">模型名称 <span>Model ID</span></label>
+      <input id="config-model" name="model" required maxlength="200" placeholder="deepseek-flash" spellcheck="false" autocomplete="off">
+      <label class="field-label" for="config-key">API Key <span id="key-state">尚未填写</span></label>
+      <input id="config-key" name="key" type="password" maxlength="4096" placeholder="粘贴 API Key" autocomplete="new-password" spellcheck="false" aria-describedby="config-key-help">
+      <p id="config-key-help" class="field-help">密钥保存在本机 .local/config.json（明文，仅当前用户可读写），不写入浏览器存储、不回显；清除密钥会同步清除本地保存值。</p>
+      <div id="config-feedback" class="config-feedback" role="status" aria-live="polite"></div>
+      <div class="config-actions"><button id="clear-config" type="button" class="secondary">清除密钥</button><button id="save-config" type="submit" class="primary">保存配置 ↗</button></div>
+    </form>
+    <p class="micro config-footnote">保存不会调用模型或产生 API 费用。实际连接可保存后通过「单步」验证。</p>
+  </dialog>
+</body></html>

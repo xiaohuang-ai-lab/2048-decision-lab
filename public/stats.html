@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>对局统计 · 2048 决策实验室</title><link rel="icon" href="data:,"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/stats.css"><script type="module" src="/stats.mjs"></script></head>
+<body>
+<header class="masthead"><a class="brand" href="/"><span class="brand-icon">算</span>小黄有算力<span class="brand-sep">/</span><span class="lab-name">2048 对局统计</span></a><a class="text-button" href="/" target="_blank" rel="noopener">打开游戏 ↗</a></header>
+<main class="stats-main">
+<section class="stats-intro"><p class="eyebrow">LATEST RUNS · LOCAL EVIDENCE</p><h1>看看它们，走了多远。</h1><p>每种算法和模型策略各取最新一局，沿着得分和最大方块，观察整个决策过程。</p></section>
+<section class="stats-toolbar" aria-label="图表设置"><label>横轴 <select id="axis"><option value="step">有效步数</option><option value="time">经过时间</option><option value="cost">累计估算成本</option></select></label><label class="refresh-toggle"><input type="checkbox" id="auto-refresh" checked> 每 10 秒刷新</label><button class="secondary" id="refresh">立即刷新</button><span id="load-status" role="status">正在读取本地日志…</span></section>
+<p id="axis-note" class="stats-note"></p>
+<p id="fx-note" class="stats-note"></p>
+<div id="legend" class="stats-legend" aria-label="模式筛选"></div>
+<p id="empty-state" hidden>还没有可统计的单一模式对局。先在游戏中完成一次操作，日志保存后即可显示。</p>
+<div id="charts" class="stats-charts"></div>
+<section class="runs-section"><div class="section-heading"><div><p class="eyebrow">SELECTED SESSIONS</p><h2>本次统计的对局</h2></div><span id="scan-summary"></span></div><div class="runs-table-wrap"><table class="runs-table"><thead><tr><th>模式 / 实际模型</th><th>对局开始 / 种子</th><th>有效步数</th><th>得分</th><th>最大方块</th><th>经过时间</th><th>API 费用估算</th><th>记录状态</th></tr></thead><tbody id="runs"></tbody></table></div></section>
+<details class="stats-method"><summary>统计口径与数据边界</summary><ul>
+<li>按对局开始时间选择每种模式最新一局；不拼接多局、不选择历史最高分。只有已保存且至少尝试过一次操作的单一模式对局参与统计。</li>
+<li>手动、JavaScript 搜索、nneonneo 搜索分别统计；大模型和 Jev 各按原始、攻略、增强策略单独统计。没有记录的组合不显示。同一种算法的版本归为一类，表格展示实际版本；原生算法的大方块回退保留在其所选模式内并注明。</li>
+<li>中途切换模式、模型策略或本地算法的对局排除，以免把其他策略的成绩归给当前策略。同一策略的提示词版本归为一类，实际模型和版本保留在表格中。</li>
+<li>步数只计有效移动；时间从首次操作准备到每次已记录的结果，包含网络、日志、重试间隔、步间等待与中途暂停，不等于纯模型推理时间。</li>
+<li>费用使用每条日志的历史费率与已报告用量，计入失败重试；图表与表格按页面注明的固定参考汇率统一折算人民币，原始日志保留原币金额。遇到缺失费用时，保留未知状态，曲线以累计已知小计继续绘制，并从首次缺失起使用虚线；未知费用未计入，不能将虚线当作完整账单或相同实际预算比较。代码 AI 和手动的 API 费用为零，未计设备和电费。</li>
+<li>“尚可继续”也可能是暂停、步数上限或错误中断，不代表仍在运行。旧版达到 2048 即停与新版持续挑战标明区别。不同种子、策略和停止条件下的单局曲线不能推出通用胜率。</li>
+</ul></details>
+</main><footer>小黄有算力 · AI 热点落地的第一站 <span>真实记录 · 估算非账单</span></footer>
+</body></html>

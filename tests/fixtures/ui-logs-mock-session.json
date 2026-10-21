@@ -1,0 +1,580 @@
+{
+  "format": "xiaohuang-2048-v1",
+  "exported_at": "2026-10-19T08:42:36.498Z",
+  "engine": "2048-v1/fnv1a-mulberry32",
+  "note": "Actual gameplay logs. Model probabilities are not win probabilities. Missing usage is unknown, not zero. Mixed-mode sessions are not independent model benchmarks.",
+  "environment": {
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+  },
+  "config": {
+    "llm": {
+      "configured": true,
+      "model": "LOCAL-TEST-FIXTURE",
+      "base": "https://api.deepseek.com",
+      "provider": "api.deepseek.com"
+    },
+    "jev": {
+      "configured": true,
+      "model": "LOCAL-TEST-FIXTURE",
+      "base": "https://api.typesafe.ai/v1",
+      "provider": "api.typesafe.ai"
+    }
+  },
+  "sessions": [
+    {
+      "id": "92afb03f-98a9-4d42-8a79-853efec7a8f6",
+      "created_at": "2026-10-19T08:40:43.556Z",
+      "seed": "xiaohuang-001",
+      "initial": {
+        "board": [
+          [
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "score": 0,
+        "steps": 0
+      },
+      "events": [
+        {
+          "id": "a12baf2c-57a3-453d-b96e-f706b070945d",
+          "at": "2026-10-19T08:40:48.528Z",
+          "mode": "llm",
+          "before": {
+            "board": [
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "score": 0,
+            "steps": 0
+          },
+          "requested_model": "LOCAL-TEST-FIXTURE",
+          "timeline": [
+            {
+              "at": "2026-10-19T08:40:48.528Z",
+              "label": "请求发出，等待模型响应"
+            },
+            {
+              "at": "2026-10-19T08:40:49.738Z",
+              "label": "收到本地服务响应"
+            },
+            {
+              "at": "2026-10-19T08:40:49.738Z",
+              "label": "动作通过校验：向上"
+            },
+            {
+              "at": "2026-10-19T08:40:49.738Z",
+              "label": "动作已执行，棋盘与得分已更新"
+            }
+          ],
+          "status": "applied",
+          "round_trip_ms": 1210,
+          "result": {
+            "direction": "up",
+            "probabilities": null,
+            "confidence": null,
+            "model": "LOCAL-TEST-FIXTURE",
+            "requested_model": "LOCAL-TEST-FIXTURE",
+            "latency_ms": 1204,
+            "usage": {
+              "prompt_tokens": 340,
+              "completion_tokens": 12,
+              "total_tokens": 352,
+              "prompt_tokens_details": {
+                "cached_tokens": 120
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 4
+              }
+            },
+            "prompt_version": "2048-direct-v1",
+            "request": {
+              "thinking": {
+                "type": "disabled"
+              },
+              "model": "LOCAL-TEST-FIXTURE",
+              "stream": false,
+              "max_tokens": 256,
+              "response_format": {
+                "type": "json_object"
+              },
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Play standard 2048 on a 4x4 board. Rows are top to bottom and columns left to right; 0 is empty. A move slides all tiles toward that edge. Adjacent equal tiles merge once per move. After a valid move, a random empty cell receives a 2 (90%) or 4 (10%). Choose exactly one available direction to maximize the chance of reaching 2048 while avoiding game over. Evaluate the current board; no future random tile or search result is provided. Return only JSON with one field: {\"direction\":\"up|down|left|right\"}. Do not add explanations."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"board\":[[0,0,2,0],[0,0,2,0],[0,0,0,0],[0,0,0,0]],\"score\":0,\"move_number\":1,\"available_moves\":[\"up\",\"down\",\"left\",\"right\"],\"options\":{\"up\":\"向上\",\"down\":\"向下\",\"left\":\"向左\",\"right\":\"向右\"}}"
+                }
+              ]
+            },
+            "raw_response": {
+              "model": "LOCAL-TEST-FIXTURE",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "message": {
+                    "content": "{\"direction\":\"up\"}"
+                  }
+                }
+              ],
+              "usage": {
+                "prompt_tokens": 340,
+                "completion_tokens": 12,
+                "total_tokens": 352,
+                "prompt_tokens_details": {
+                  "cached_tokens": 120
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 4
+                }
+              }
+            }
+          },
+          "direction": "up",
+          "gained": 4,
+          "spawned": {
+            "row": 0,
+            "col": 0,
+            "value": 2
+          },
+          "after": {
+            "board": [
+              [
+                2,
+                0,
+                4,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "score": 4,
+            "steps": 1
+          }
+        },
+        {
+          "id": "0801a5bf-5d91-44a0-9c42-eb0bbfb0084b",
+          "at": "2026-10-19T08:41:07.650Z",
+          "mode": "jev",
+          "before": {
+            "board": [
+              [
+                2,
+                0,
+                4,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "score": 4,
+            "steps": 1
+          },
+          "requested_model": "LOCAL-TEST-FIXTURE",
+          "timeline": [
+            {
+              "at": "2026-10-19T08:41:07.650Z",
+              "label": "请求发出，等待模型响应"
+            },
+            {
+              "at": "2026-10-19T08:41:08.861Z",
+              "label": "收到本地服务响应"
+            },
+            {
+              "at": "2026-10-19T08:41:08.861Z",
+              "label": "动作通过校验：向下"
+            },
+            {
+              "at": "2026-10-19T08:41:08.861Z",
+              "label": "动作已执行，棋盘与得分已更新"
+            }
+          ],
+          "status": "applied",
+          "round_trip_ms": 1211,
+          "result": {
+            "direction": "down",
+            "probabilities": {
+              "down": 1,
+              "left": 0,
+              "right": 0
+            },
+            "confidence": 1,
+            "model": "LOCAL-TEST-FIXTURE",
+            "requested_model": "LOCAL-TEST-FIXTURE",
+            "latency_ms": 1203,
+            "usage": {
+              "input_tokens": 210,
+              "output_tokens": 24
+            },
+            "prompt_version": "2048-direct-v1",
+            "request": {
+              "model": "LOCAL-TEST-FIXTURE",
+              "state": {
+                "board": [
+                  [
+                    2,
+                    0,
+                    4,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ],
+                "score": 4,
+                "move_number": 2,
+                "available_moves": [
+                  "down",
+                  "left",
+                  "right"
+                ],
+                "options": {
+                  "down": "向下",
+                  "left": "向左",
+                  "right": "向右"
+                }
+              },
+              "questions": {
+                "move": {
+                  "type": "choice",
+                  "instructions": "Play standard 2048 on a 4x4 board. Rows are top to bottom and columns left to right; 0 is empty. A move slides all tiles toward that edge. Adjacent equal tiles merge once per move. After a valid move, a random empty cell receives a 2 (90%) or 4 (10%). Choose exactly one available direction to maximize the chance of reaching 2048 while avoiding game over. Evaluate the current board; no future random tile or search result is provided.",
+                  "criteria": {
+                    "down": "向下",
+                    "left": "向左",
+                    "right": "向右"
+                  }
+                }
+              }
+            },
+            "raw_response": {
+              "model": "LOCAL-TEST-FIXTURE",
+              "answers": {
+                "move": {
+                  "type": "choice",
+                  "choice": "down",
+                  "probabilities": {
+                    "down": 1,
+                    "left": 0,
+                    "right": 0
+                  },
+                  "confidence": 1
+                }
+              },
+              "usage": {
+                "input_tokens": 210,
+                "output_tokens": 24
+              }
+            }
+          },
+          "direction": "down",
+          "gained": 0,
+          "spawned": {
+            "row": 1,
+            "col": 1,
+            "value": 2
+          },
+          "after": {
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                4,
+                0
+              ]
+            ],
+            "score": 4,
+            "steps": 2
+          }
+        },
+        {
+          "id": "dbc1bdf8-e296-493f-a6b5-74697a4ddb89",
+          "at": "2026-10-19T08:41:21.212Z",
+          "mode": "llm",
+          "before": {
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                4,
+                0
+              ]
+            ],
+            "score": 4,
+            "steps": 2
+          },
+          "requested_model": "LOCAL-TEST-FIXTURE",
+          "timeline": [
+            {
+              "at": "2026-10-19T08:41:21.212Z",
+              "label": "请求发出，等待模型响应"
+            },
+            {
+              "at": "2026-10-19T08:41:22.420Z",
+              "label": "收到本地服务响应"
+            },
+            {
+              "at": "2026-10-19T08:41:22.420Z",
+              "label": "请求或动作失败，停止执行"
+            }
+          ],
+          "status": "failed",
+          "round_trip_ms": 1208,
+          "evidence": {
+            "prompt_version": "2048-direct-v1",
+            "request": {
+              "thinking": {
+                "type": "disabled"
+              },
+              "model": "LOCAL-TEST-FIXTURE",
+              "stream": false,
+              "max_tokens": 256,
+              "response_format": {
+                "type": "json_object"
+              },
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Play standard 2048 on a 4x4 board. Rows are top to bottom and columns left to right; 0 is empty. A move slides all tiles toward that edge. Adjacent equal tiles merge once per move. After a valid move, a random empty cell receives a 2 (90%) or 4 (10%). Choose exactly one available direction to maximize the chance of reaching 2048 while avoiding game over. Evaluate the current board; no future random tile or search result is provided. Return only JSON with one field: {\"direction\":\"up|down|left|right\"}. Do not add explanations."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"board\":[[0,0,0,0],[0,2,0,0],[0,0,0,0],[2,0,4,0]],\"score\":4,\"move_number\":3,\"available_moves\":[\"up\",\"down\",\"left\",\"right\"],\"options\":{\"up\":\"向上\",\"down\":\"向下\",\"left\":\"向左\",\"right\":\"向右\"}}"
+                }
+              ]
+            },
+            "raw_response": {
+              "model": "LOCAL-TEST-FIXTURE",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "message": {
+                    "content": "{\"direction\":\"diagonal\"}"
+                  }
+                }
+              ],
+              "usage": {
+                "prompt_tokens": 340,
+                "completion_tokens": 12,
+                "total_tokens": 352,
+                "prompt_tokens_details": {
+                  "cached_tokens": 120
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 4
+                }
+              }
+            },
+            "latency_ms": 1203
+          },
+          "error": "模型选择了无效方向，本步未执行"
+        },
+        {
+          "id": "4e35a415-b78b-4169-b169-6ce9b0a99473",
+          "at": "2026-10-19T08:42:02.401Z",
+          "mode": "llm",
+          "before": {
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                4,
+                0
+              ]
+            ],
+            "score": 4,
+            "steps": 2
+          },
+          "requested_model": "LOCAL-TEST-FIXTURE",
+          "timeline": [
+            {
+              "at": "2026-10-19T08:42:02.401Z",
+              "label": "请求发出，等待模型响应"
+            },
+            {
+              "at": "2026-10-19T08:42:02.685Z",
+              "label": "请求已取消，未执行动作"
+            }
+          ],
+          "status": "cancelled",
+          "error": "客户端取消，上游可能已计费，返回用量未知。",
+          "round_trip_ms": 284
+        }
+      ],
+      "final": {
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            4,
+            0
+          ]
+        ],
+        "score": 4,
+        "steps": 2
+      }
+    }
+  ]
+}

@@ -1,0 +1,516 @@
+{
+  "format": "xiaohuang-2048-v1",
+  "exported_at": "2026-10-19T08:31:52.720Z",
+  "engine": "2048-v1/fnv1a-mulberry32",
+  "note": "Actual gameplay logs. Model probabilities are not win probabilities. Missing usage is unknown, not zero. Mixed-mode sessions are not independent model benchmarks.",
+  "environment": {
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+  },
+  "config": {
+    "llm": {
+      "configured": true,
+      "model": "LOCAL-TEST-FIXTURE",
+      "provider": "api.deepseek.com"
+    },
+    "jev": {
+      "configured": true,
+      "model": "LOCAL-TEST-FIXTURE",
+      "provider": "api.typesafe.ai"
+    }
+  },
+  "sessions": [
+    {
+      "id": "7d9e705e-f608-4120-9876-5c7cdd26f72e",
+      "created_at": "2026-10-19T08:29:11.841Z",
+      "seed": "xiaohuang-001",
+      "initial": {
+        "board": [
+          [
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "score": 0,
+        "steps": 0
+      },
+      "events": [
+        {
+          "at": "2026-10-19T08:29:22.778Z",
+          "mode": "llm",
+          "before": {
+            "board": [
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "score": 0,
+            "steps": 0
+          },
+          "status": "applied",
+          "round_trip_ms": 1212,
+          "result": {
+            "direction": "up",
+            "probabilities": null,
+            "confidence": null,
+            "model": "LOCAL-TEST-FIXTURE",
+            "requested_model": "LOCAL-TEST-FIXTURE",
+            "latency_ms": 1206,
+            "usage": {
+              "prompt_tokens": 10,
+              "completion_tokens": 5
+            },
+            "prompt_version": "2048-direct-v1",
+            "request": {
+              "thinking": {
+                "type": "disabled"
+              },
+              "model": "LOCAL-TEST-FIXTURE",
+              "stream": false,
+              "max_tokens": 256,
+              "response_format": {
+                "type": "json_object"
+              },
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Play standard 2048 on a 4x4 board. Rows are top to bottom and columns left to right; 0 is empty. A move slides all tiles toward that edge. Adjacent equal tiles merge once per move. After a valid move, a random empty cell receives a 2 (90%) or 4 (10%). Choose exactly one available direction to maximize the chance of reaching 2048 while avoiding game over. Evaluate the current board; no future random tile or search result is provided. Return only JSON with one field: {\"direction\":\"up|down|left|right\"}. Do not add explanations."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"board\":[[0,0,2,0],[0,0,2,0],[0,0,0,0],[0,0,0,0]],\"score\":0,\"move_number\":1,\"available_moves\":[\"up\",\"down\",\"left\",\"right\"],\"options\":{\"up\":\"向上\",\"down\":\"向下\",\"left\":\"向左\",\"right\":\"向右\"}}"
+                }
+              ]
+            },
+            "raw_response": {
+              "model": "LOCAL-TEST-FIXTURE",
+              "choices": [
+                {
+                  "finish_reason": "stop",
+                  "message": {
+                    "content": "{\"direction\":\"up\"}"
+                  }
+                }
+              ],
+              "usage": {
+                "prompt_tokens": 10,
+                "completion_tokens": 5
+              }
+            }
+          },
+          "direction": "up",
+          "gained": 4,
+          "spawned": {
+            "row": 0,
+            "col": 0,
+            "value": 2
+          },
+          "after": {
+            "board": [
+              [
+                2,
+                0,
+                4,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "score": 4,
+            "steps": 1
+          }
+        },
+        {
+          "at": "2026-10-19T08:29:53.369Z",
+          "mode": "jev",
+          "before": {
+            "board": [
+              [
+                2,
+                0,
+                4,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "score": 4,
+            "steps": 1
+          },
+          "status": "applied",
+          "round_trip_ms": 1217,
+          "result": {
+            "direction": "down",
+            "probabilities": {
+              "down": 1,
+              "left": 0,
+              "right": 0
+            },
+            "confidence": 1,
+            "model": "LOCAL-TEST-FIXTURE",
+            "requested_model": "LOCAL-TEST-FIXTURE",
+            "latency_ms": 1203,
+            "usage": {
+              "input_tokens": 10,
+              "output_tokens": 5
+            },
+            "prompt_version": "2048-direct-v1",
+            "request": {
+              "model": "LOCAL-TEST-FIXTURE",
+              "state": {
+                "board": [
+                  [
+                    2,
+                    0,
+                    4,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ],
+                "score": 4,
+                "move_number": 2,
+                "available_moves": [
+                  "down",
+                  "left",
+                  "right"
+                ],
+                "options": {
+                  "down": "向下",
+                  "left": "向左",
+                  "right": "向右"
+                }
+              },
+              "questions": {
+                "move": {
+                  "type": "choice",
+                  "instructions": "Play standard 2048 on a 4x4 board. Rows are top to bottom and columns left to right; 0 is empty. A move slides all tiles toward that edge. Adjacent equal tiles merge once per move. After a valid move, a random empty cell receives a 2 (90%) or 4 (10%). Choose exactly one available direction to maximize the chance of reaching 2048 while avoiding game over. Evaluate the current board; no future random tile or search result is provided.",
+                  "criteria": {
+                    "down": "向下",
+                    "left": "向左",
+                    "right": "向右"
+                  }
+                }
+              }
+            },
+            "raw_response": {
+              "model": "LOCAL-TEST-FIXTURE",
+              "answers": {
+                "move": {
+                  "type": "choice",
+                  "choice": "down",
+                  "probabilities": {
+                    "down": 1,
+                    "left": 0,
+                    "right": 0
+                  },
+                  "confidence": 1
+                }
+              },
+              "usage": {
+                "input_tokens": 10,
+                "output_tokens": 5
+              }
+            }
+          },
+          "direction": "down",
+          "gained": 0,
+          "spawned": {
+            "row": 1,
+            "col": 1,
+            "value": 2
+          },
+          "after": {
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                4,
+                0
+              ]
+            ],
+            "score": 4,
+            "steps": 2
+          }
+        },
+        {
+          "at": "2026-10-19T08:30:52.517Z",
+          "mode": "jev",
+          "before": {
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                4,
+                0
+              ]
+            ],
+            "score": 4,
+            "steps": 2
+          },
+          "status": "cancelled",
+          "error": "客户端取消，上游可能已计费，返回用量未知。",
+          "round_trip_ms": 24
+        }
+      ],
+      "final": {
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            4,
+            0
+          ]
+        ],
+        "score": 4,
+        "steps": 2
+      }
+    },
+    {
+      "id": "3761e14e-9ce3-489d-94e3-80117d1d040c",
+      "created_at": "2026-10-19T08:30:52.540Z",
+      "seed": "fba7a72e",
+      "initial": {
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "score": 0,
+        "steps": 0
+      },
+      "events": [
+        {
+          "at": "2026-10-19T08:31:48.002Z",
+          "mode": "jev",
+          "before": {
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "score": 0,
+            "steps": 0
+          },
+          "status": "cancelled",
+          "error": "客户端取消，上游可能已计费，返回用量未知。",
+          "round_trip_ms": 263
+        }
+      ],
+      "final": {
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "score": 0,
+        "steps": 0
+      }
+    }
+  ]
+}
