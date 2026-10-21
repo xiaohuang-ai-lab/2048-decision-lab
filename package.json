@@ -15,6 +15,6 @@
   "description": "2048 决策实验室：对比 Jev、大模型与本地 Expectimax 算法",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/hevbevt/2048-decision-lab.git"
+    "url": "git+ssh://git@github.com/xiaohuang-ai-lab/2048-decision-lab.git"
   }
 }

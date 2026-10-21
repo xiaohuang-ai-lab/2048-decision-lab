@@ -2,7 +2,7 @@
 
 把同一张 2048 棋盘交给 Jev、大模型或本地搜索算法，观察它们如何选择下一步，以及得分、速度和 API 费用的差异。由「小黄有算力」的 Jev 实验项目独立整理而来。
 
-本项目属于 [小黄实验室](https://github.com/users/hevbevt/projects/1)，这里汇总后续 AI 实验、独立仓库和面向读者的开源进度。
+本项目属于 [小黄实验室](https://github.com/xiaohuang-ai-lab)。后续 AI 实验以独立仓库的形式放在这个组织中，作为面向读者的代码入口。
 
 ## 能做什么
 
@@ -20,7 +20,7 @@
 需要 Node.js 22 或更新版本。项目使用 Node.js 内置模块和原生 HTML / CSS / JavaScript，**无需 npm install**。
 
 ```sh
-git clone https://github.com/hevbevt/2048-decision-lab.git
+git clone https://github.com/xiaohuang-ai-lab/2048-decision-lab.git
 cd 2048-decision-lab
 npm start
 ```
